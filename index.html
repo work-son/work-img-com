@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="サーバー送信なしでJPG・PNG・WebP画像を安全に圧縮できる無料の画像軽量化ツール">
+  <meta name="keywords" content="画像圧縮, 이미지 용량 줄이기, JPG 압축, PNG 압축, WebP 변환, 무료 画像圧縮">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://example.com/">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>work-img — 서버 전송 없는 무료 画像圧縮</title>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="work-img — 서버 전송 없는 무료 画像圧縮">
+  <meta property="og:description" content="画像を外部サーバーへアップロードせず、ブラウザ上でそのまま圧縮できます。">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="https://example.com/assets/icons/og-image.png">
+
+  <!--
+    AdSense 승인 후 아래 예시를 실제 publisher ID로 교체하세요.
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+      crossorigin="anonymous"></script>
+  -->
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="./" aria-label="work-img home">
+      <span class="brand-mark">I</span>
+      <span>work-img</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#tool" data-i18n="navTool">画像圧縮</a>
+      <a href="#features" data-i18n="navFeatures">機能</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <label class="lang-wrap">
+      <span class="sr-only">Language</span>
+      <select id="langSelect" class="lang-select" aria-label="Language">
+        <option value="ko">🇰🇷 KR</option>
+        <option value="ja" selected>🇯🇵 JP</option>
+        <option value="en">🇺🇸 EN</option>
+      </select>
+    </label>
+  </div>
+</header>
+
+<main>
+  <section class="hero container">
+    <div class="badge" data-i18n="badge">🔒 서버 전송 없는 画像圧縮</div>
+    <h1 data-i18n="heroTitle">画像は軽く。<br>プライバシーはそのまま。</h1>
+    <p class="hero-copy" data-i18n="heroCopy">
+      JPG, PNG, WebP 이미지를 브라우저에서 바로 압축하세요.
+      이미지 파일은 외부 서버로 전송되거나 저장되지 않습니다.
+    </p>
+
+    <div class="trust-row" aria-label="Service highlights">
+      <span data-i18n="trust1">✓ 無料</span>
+      <span data-i18n="trust2">✓ 登録不要</span>
+      <span data-i18n="trust3">✓ ローカル処理</span>
+    </div>
+  </section>
+
+  <section id="tool" class="container tool-panel" aria-labelledby="toolTitle">
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-describedby="dropHelp">
+      <div class="upload-icon" aria-hidden="true">⇧</div>
+      <h2 id="toolTitle" data-i18n="dropTitle">画像をここにドラッグ＆ドロップ</h2>
+      <p id="dropHelp" data-i18n="dropHelp">またはボタンから選択 · 複数枚対応</p>
+      <button id="pickBtn" class="primary-btn" type="button" data-i18n="choose">画像を選択</button>
+      <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple hidden>
+      <p class="privacy-inline" data-i18n="privacyInline">🛡️ すべての処理はこのブラウザ内だけで行われます。</p>
+    </div>
+
+    <div class="controls">
+      <div class="control-block quality-block">
+        <div class="control-head">
+          <label for="quality" data-i18n="qualityLabel">圧縮品質</label>
+          <output id="qualityValue" for="quality">80%</output>
+        </div>
+        <input id="quality" type="range" min="20" max="95" value="80" step="1">
+        <div class="range-labels"><span>20%</span><span>95%</span></div>
+      </div>
+
+      <div class="control-block">
+        <label for="formatSelect" data-i18n="formatLabel">出力形式</label>
+        <select id="formatSelect" class="select-control">
+          <option value="auto" data-i18n="keepFormat">元の形式を維持</option>
+          <option value="image/jpeg">JPG</option>
+          <option value="image/webp">WebP</option>
+          <option value="image/png">PNG</option>
+        </select>
+      </div>
+
+      <div class="control-block">
+        <label for="resizeSelect" data-i18n="resizeLabel">画像サイズ</label>
+        <select id="resizeSelect" class="select-control">
+          <option value="1" data-i18n="resizeOriginal">元のサイズ</option>
+          <option value="0.75">75%</option>
+          <option value="0.5">50%</option>
+          <option value="0.25">25%</option>
+        </select>
+      </div>
+
+      <div class="control-block action-block">
+        <button id="downloadAll" class="secondary-btn" type="button" disabled data-i18n="downloadZip">すべてダウンロード</button>
+      </div>
+    </div>
+
+    <div id="status" class="status" aria-live="polite"></div>
+    <div id="summary" class="summary" hidden>
+      <article>
+        <span data-i18n="summaryBefore">圧縮前</span>
+        <strong id="beforeTotal">0 KB</strong>
+      </article>
+      <article>
+        <span data-i18n="summaryAfter">圧縮後</span>
+        <strong id="afterTotal">0 KB</strong>
+      </article>
+      <article>
+        <span data-i18n="summarySaved">削減率</span>
+        <strong id="savedTotal" class="saved">0%</strong>
+      </article>
+    </div>
+
+    <div id="results" class="results"></div>
+  </section>
+
+  <section class="container ad-slot" aria-label="Advertisement">
+    <span>ADVERTISEMENT</span>
+    <!-- 실제 AdSense 광고 단위 코드 삽입 위치 -->
+  </section>
+
+  <section id="features" class="container section">
+    <div class="section-heading">
+      <p class="section-kicker" data-i18n="featureKicker">WHY WORK-IMG</p>
+      <h2 data-i18n="featureTitle">간단하지만 필요한 機能은 제대로</h2>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3 data-i18n="f1Title">サーバー送信なし</h3>
+        <p data-i18n="f1Text">画像データはユーザーのブラウザ内で処理されます。</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">🧹</div>
+        <h3 data-i18n="f2Title">メタデータ削除</h3>
+        <p data-i18n="f2Text">画像を再エンコードし、EXIFなど不要なメタデータを削除します。</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3 data-i18n="f3Title">ZIP 一括ダウンロード</h3>
+        <p data-i18n="f3Text">압축한 여러 이미지를 하나의 ZIP 파일로 묶어 다운로드할 수 있습니다.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 data-i18n="f4Title">モバイル対応</h3>
+        <p data-i18n="f4Text">スマートフォンやタブレットでも使いやすいレスポンシブ設計です。</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="faq" class="container section faq-section">
+    <div class="section-heading">
+      <p class="section-kicker">FAQ</p>
+      <h2 data-i18n="faqTitle">よくある質問</h2>
+    </div>
+
+    <details>
+      <summary data-i18n="faq1q">本当に画像はサーバーへ送信されませんか？</summary>
+      <p data-i18n="faq1a">네. 압축 처리는 브라우저의 Canvas API를 이용해 사용자의 기기에서 수행됩니다.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq2q">PNGも圧縮できますか？</summary>
+      <p data-i18n="faq2a">가능합니다. PNG는 무손실 포맷 특성상 JPG/WebP보다 용량 변화가 작을 수 있으며, 낮은 품질에서는 색상 단계를 줄여 추가 절감을 시도합니다.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq3q">写真の位置情報も削除されますか？</summary>
+      <p data-i18n="faq3a">이미지를 Canvas로 다시 생성하기 때문에 일반적인 EXIF 위치 정보는 결과 파일에 포함되지 않습니다.</p>
+    </details>
+  </section>
+
+  <section class="container ad-slot ad-slot-bottom" aria-label="Advertisement">
+    <span>ADVERTISEMENT</span>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href="./">
+        <span class="brand-mark">I</span><span>work-img</span>
+      </a>
+      <p data-i18n="footerDesc">서버 전송 없이 안전하게 사용하는 무료 画像圧縮 도구.</p>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html" data-i18n="privacyLink">プライバシーポリシー</a>
+      <a href="terms.html" data-i18n="termsLink">利用規約</a>
+      <a href="contact.html" data-i18n="contactLink">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="container copyright">© 2026 work-img</div>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="サーバー送信なしでJPG・PNG・WebP画像を安全に圧縮できる無料の画像軽量化ツール">
+  <meta name="keywords" content="画像圧縮, 이미지 용량 줄이기, JPG 압축, PNG 압축, WebP 변환, 무료 画像圧縮">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://example.com/">
+  <style>
+
+:root{--bg:#f7f8fc;--panel:#fff;--text:#111827;--muted:#667085;--line:#e5e7eb;--primary:#5b55e7;--primary-dark:#4740cf;--primary-soft:#f0efff;--success:#09875f;--danger:#c43232;--warning-bg:#fff8e8;--warning-text:#9a6700;--shadow:0 18px 55px rgba(17,24,39,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 18% 0%,rgba(91,85,231,.08),transparent 26%),linear-gradient(#fbfcff,#f7f8fc 55%,#fff);line-height:1.5}
+button,input,select{font:inherit}button,select,input[type=range]{cursor:pointer}a{color:inherit}.container{width:min(1160px,calc(100% - 32px));margin-inline:auto}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);border-bottom:1px solid rgba(229,231,235,.85);backdrop-filter:blur(16px)}.nav{min-height:72px;display:flex;align-items:center;gap:30px}.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:900;font-size:20px;letter-spacing:-.03em}.brand-mark{width:34px;height:34px;display:grid;place-items:center;color:#fff;border-radius:11px;background:linear-gradient(135deg,var(--primary),#8b5cf6);box-shadow:0 7px 18px rgba(91,85,231,.28)}
+.nav-links{margin-left:auto;display:flex;align-items:center;gap:6px}.nav-links a,.footer-links a{color:#475467;text-decoration:none;font-size:14px;font-weight:700;padding:9px 11px;border-radius:10px}.nav-links a:hover{background:#f4f4f8}.lang-wrap{margin-left:8px}.lang-select,.select-control{border:1px solid var(--line);background:#fff;color:#344054;border-radius:12px;padding:10px 12px;font-weight:700}
+.hero{text-align:center;padding:72px 0 30px}.badge{display:inline-block;padding:8px 13px;background:var(--primary-soft);color:var(--primary);font-size:13px;font-weight:900;border-radius:999px}.hero h1{max-width:830px;margin:20px auto 0;font-size:clamp(40px,6.5vw,70px);line-height:1.02;letter-spacing:-.055em}.hero-copy{max-width:700px;margin:20px auto 0;color:var(--muted);font-size:18px;line-height:1.75}.trust-row{margin-top:20px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;color:#475467;font-size:13px;font-weight:800}
+.tool-panel{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow)}.dropzone{min-height:330px;border:2px dashed #ced4df;border-radius:22px;background:linear-gradient(180deg,#fdfdff,#f8f9ff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:35px 20px;transition:.2s ease}.dropzone.dragover{border-color:var(--primary);background:#f4f3ff;transform:translateY(-1px)}.upload-icon{width:72px;height:72px;display:grid;place-items:center;border-radius:22px;background:var(--primary-soft);color:var(--primary);font-size:34px;font-weight:600}.dropzone h2{margin:18px 0 0;font-size:25px;letter-spacing:-.035em}.dropzone>p{margin:8px 0 0;color:var(--muted)}
+.primary-btn,.secondary-btn,.small-btn{border:0;border-radius:13px;font-weight:900;transition:.15s ease}.primary-btn{margin-top:20px;padding:13px 22px;color:#fff;background:linear-gradient(135deg,var(--primary),#7367f0);box-shadow:0 10px 22px rgba(91,85,231,.22)}.primary-btn:hover{transform:translateY(-1px)}.privacy-inline{font-size:13px!important;font-weight:700;color:#475467!important;margin-top:18px!important}
+.controls{display:grid;grid-template-columns:minmax(260px,1.5fr) minmax(150px,.7fr) minmax(150px,.7fr) auto;gap:12px;align-items:end;margin-top:16px;padding:16px;background:#fafbff;border:1px solid var(--line);border-radius:16px}.control-block{display:flex;flex-direction:column;gap:8px}.control-block>label,.control-head label{font-size:13px;font-weight:900;color:#344054}.control-head{display:flex;align-items:center;justify-content:space-between}#qualityValue{min-width:66px;text-align:center;padding:6px 9px;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-weight:950;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--primary)}.range-labels{display:flex;justify-content:space-between;font-size:11px;color:#98a2b3}
+.secondary-btn{min-height:43px;padding:10px 14px;background:#fff;border:1px solid var(--line);color:#344054}.secondary-btn:disabled{opacity:.45;cursor:not-allowed}.status{display:none;margin-top:14px;padding:12px 14px;border-radius:12px;font-size:13px;font-weight:700}.status.show{display:block}.status.info{background:#f5f7ff;color:#4c46bd;border:1px solid #dddafc}.status.warn{background:var(--warning-bg);color:var(--warning-text);border:1px solid #f5d985}.status.error{background:#fff1f1;color:var(--danger);border:1px solid #f5c2c2}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.summary article{padding:18px;border:1px solid var(--line);border-radius:16px;background:#fff}.summary span{display:block;font-size:12px;color:var(--muted);font-weight:700}.summary strong{display:block;font-size:24px;margin-top:4px}.summary .saved{color:var(--success)}
+.results{display:grid;gap:12px;margin-top:16px}.result-card{display:grid;grid-template-columns:80px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:16px;background:#fff}.thumb{width:80px;height:80px;object-fit:cover;border-radius:12px;background:#f3f4f6;border:1px solid var(--line)}.file-name{font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-meta{display:flex;flex-wrap:wrap;gap:7px 14px;margin-top:6px;color:var(--muted);font-size:12px}.file-meta .good{color:var(--success);font-weight:900}.file-actions{display:flex;gap:8px}.small-btn{padding:9px 11px;background:#fff;border:1px solid var(--line);color:#344054}.small-btn.primary{color:var(--primary)}
+.ad-slot{min-height:100px;margin-top:26px;border:1px dashed #d0d5dd;border-radius:16px;display:grid;place-items:center;background:#fbfbfc;color:#98a2b3;font-size:11px;letter-spacing:.12em}.section{padding-top:85px;padding-bottom:24px}.section-heading{text-align:center;max-width:720px;margin:0 auto 32px}.section-kicker{margin:0 0 8px;color:var(--primary);font-weight:950;font-size:12px;letter-spacing:.12em}.section-heading h2{margin:0;font-size:clamp(28px,4vw,42px);letter-spacing:-.04em}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature-card{padding:24px;border:1px solid var(--line);border-radius:20px;background:#fff}.feature-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--primary-soft);font-size:21px}.feature-card h3{margin:16px 0 7px;font-size:17px}.feature-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+.faq-section{padding-bottom:70px}.faq-section details{max-width:820px;margin:10px auto;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 18px}.faq-section summary{cursor:pointer;padding:18px 0;font-weight:900}.faq-section details p{margin:0;padding:0 0 18px;color:var(--muted);line-height:1.7}.ad-slot-bottom{margin-bottom:70px}.site-footer{border-top:1px solid var(--line);background:#fff}.footer-grid{display:flex;justify-content:space-between;gap:30px;padding:40px 0 25px}.footer-brand{font-size:18px}.footer-grid p{margin:12px 0 0;color:var(--muted);font-size:13px}.footer-links{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}.copyright{padding:18px 0 30px;border-top:1px solid #f0f1f3;color:#98a2b3;font-size:12px}.legal{max-width:820px;padding-top:55px;padding-bottom:80px}.legal h1{font-size:38px;letter-spacing:-.04em}.legal h2{margin-top:34px}.legal p,.legal li{color:#475467;line-height:1.8}
+@media(max-width:900px){.controls{grid-template-columns:1fr 1fr}.quality-block{grid-column:1/-1}.action-block{grid-column:1/-1}.feature-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.container{width:min(100% - 22px,1160px)}.nav{min-height:64px}.nav-links{display:none}.lang-wrap{margin-left:auto}.hero{padding:46px 0 24px}.hero-copy{font-size:16px}.tool-panel{padding:10px;border-radius:20px}.dropzone{min-height:300px}.controls{grid-template-columns:1fr;padding:12px}.quality-block,.action-block{grid-column:auto}.select-control,.secondary-btn{width:100%}.summary{grid-template-columns:1fr}.result-card{grid-template-columns:64px minmax(0,1fr)}.thumb{width:64px;height:64px}.file-actions{grid-column:1/-1}.file-actions .small-btn{flex:1}.feature-grid{grid-template-columns:1fr}.footer-grid{flex-direction:column}}
+
+.file-meta .bad{color:var(--danger);font-weight:900}
+.optimized-note{display:inline-flex;align-items:center;padding:2px 7px;border-radius:999px;background:#eefbf5;color:var(--success);font-weight:800}
+.summary .increased{color:var(--danger)}
+
+</style>
+  <title>work-img — 서버 전송 없는 무료 画像圧縮</title>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="work-img — 서버 전송 없는 무료 画像圧縮">
+  <meta property="og:description" content="画像を外部サーバーへアップロードせず、ブラウザ上でそのまま圧縮できます。">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="https://example.com/assets/icons/og-image.png">
+
+  <!--
+    AdSense 승인 후 아래 예시를 실제 publisher ID로 교체하세요.
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+      crossorigin="anonymous"></script>
+  -->
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="./" aria-label="work-img home">
+      <span class="brand-mark">I</span>
+      <span>work-img</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#tool" data-i18n="navTool">画像圧縮</a>
+      <a href="#features" data-i18n="navFeatures">機能</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <label class="lang-wrap">
+      <span class="sr-only">Language</span>
+      <select id="langSelect" class="lang-select" aria-label="Language">
+        <option value="ko">🇰🇷 KR</option>
+        <option value="ja" selected>🇯🇵 JP</option>
+        <option value="en">🇺🇸 EN</option>
+      </select>
+    </label>
+  </div>
+</header>
+
+<main>
+  <section class="hero container">
+    <div class="badge" data-i18n="badge">🔒 서버 전송 없는 画像圧縮</div>
+    <h1 data-i18n="heroTitle">画像は軽く。<br>プライバシーはそのまま。</h1>
+    <p class="hero-copy" data-i18n="heroCopy">
+      JPG, PNG, WebP 이미지를 브라우저에서 바로 압축하세요.
+      이미지 파일은 외부 서버로 전송되거나 저장되지 않습니다.
+    </p>
+
+    <div class="trust-row" aria-label="Service highlights">
+      <span data-i18n="trust1">✓ 無料</span>
+      <span data-i18n="trust2">✓ 登録不要</span>
+      <span data-i18n="trust3">✓ ローカル処理</span>
+    </div>
+  </section>
+
+  <section id="tool" class="container tool-panel" aria-labelledby="toolTitle">
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-describedby="dropHelp">
+      <div class="upload-icon" aria-hidden="true">⇧</div>
+      <h2 id="toolTitle" data-i18n="dropTitle">画像をここにドラッグ＆ドロップ</h2>
+      <p id="dropHelp" data-i18n="dropHelp">またはボタンから選択 · 複数枚対応</p>
+      <button id="pickBtn" class="primary-btn" type="button" data-i18n="choose">画像を選択</button>
+      <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple hidden>
+      <p class="privacy-inline" data-i18n="privacyInline">🛡️ すべての処理はこのブラウザ内だけで行われます。</p>
+    </div>
+
+    <div class="controls">
+      <div class="control-block quality-block">
+        <div class="control-head">
+          <label for="quality" data-i18n="qualityLabel">圧縮品質</label>
+          <output id="qualityValue" for="quality">80%</output>
+        </div>
+        <input id="quality" type="range" min="20" max="95" value="80" step="1">
+        <div class="range-labels"><span>20%</span><span>95%</span></div>
+      </div>
+
+      <div class="control-block">
+        <label for="formatSelect" data-i18n="formatLabel">出力形式</label>
+        <select id="formatSelect" class="select-control">
+          <option value="auto" data-i18n="keepFormat">元の形式を維持</option>
+          <option value="image/jpeg">JPG</option>
+          <option value="image/webp">WebP</option>
+          <option value="image/png">PNG</option>
+        </select>
+      </div>
+
+      <div class="control-block">
+        <label for="resizeSelect" data-i18n="resizeLabel">画像サイズ</label>
+        <select id="resizeSelect" class="select-control">
+          <option value="1" data-i18n="resizeOriginal">元のサイズ</option>
+          <option value="0.75">75%</option>
+          <option value="0.5">50%</option>
+          <option value="0.25">25%</option>
+        </select>
+      </div>
+
+      <div class="control-block action-block">
+        <button id="downloadAll" class="secondary-btn" type="button" disabled data-i18n="downloadZip">すべてダウンロード</button>
+      </div>
+    </div>
+
+    <div id="status" class="status" aria-live="polite"></div>
+    <div id="summary" class="summary" hidden>
+      <article>
+        <span data-i18n="summaryBefore">圧縮前</span>
+        <strong id="beforeTotal">0 KB</strong>
+      </article>
+      <article>
+        <span data-i18n="summaryAfter">圧縮後</span>
+        <strong id="afterTotal">0 KB</strong>
+      </article>
+      <article>
+        <span data-i18n="summarySaved">削減率</span>
+        <strong id="savedTotal" class="saved">0%</strong>
+      </article>
+    </div>
+
+    <div id="results" class="results"></div>
+  </section>
+
+  <section class="container ad-slot" aria-label="Advertisement">
+    <span>ADVERTISEMENT</span>
+    <!-- 실제 AdSense 광고 단위 코드 삽입 위치 -->
+  </section>
+
+  <section id="features" class="container section">
+    <div class="section-heading">
+      <p class="section-kicker" data-i18n="featureKicker">WHY WORK-IMG</p>
+      <h2 data-i18n="featureTitle">간단하지만 필요한 機能은 제대로</h2>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3 data-i18n="f1Title">サーバー送信なし</h3>
+        <p data-i18n="f1Text">画像データはユーザーのブラウザ内で処理されます。</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">🧹</div>
+        <h3 data-i18n="f2Title">メタデータ削除</h3>
+        <p data-i18n="f2Text">画像を再エンコードし、EXIFなど不要なメタデータを削除します。</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3 data-i18n="f3Title">ZIP 一括ダウンロード</h3>
+        <p data-i18n="f3Text">압축한 여러 이미지를 하나의 ZIP 파일로 묶어 다운로드할 수 있습니다.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 data-i18n="f4Title">モバイル対応</h3>
+        <p data-i18n="f4Text">スマートフォンやタブレットでも使いやすいレスポンシブ設計です。</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="faq" class="container section faq-section">
+    <div class="section-heading">
+      <p class="section-kicker">FAQ</p>
+      <h2 data-i18n="faqTitle">よくある質問</h2>
+    </div>
+
+    <details>
+      <summary data-i18n="faq1q">本当に画像はサーバーへ送信されませんか？</summary>
+      <p data-i18n="faq1a">네. 압축 처리는 브라우저의 Canvas API를 이용해 사용자의 기기에서 수행됩니다.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq2q">PNGも圧縮できますか？</summary>
+      <p data-i18n="faq2a">가능합니다. PNG는 무손실 포맷 특성상 JPG/WebP보다 용량 변화가 작을 수 있으며, 낮은 품질에서는 색상 단계를 줄여 추가 절감을 시도합니다.</p>
+    </details>
+    <details>
+      <summary data-i18n="faq3q">写真の位置情報も削除されますか？</summary>
+      <p data-i18n="faq3a">이미지를 Canvas로 다시 생성하기 때문에 일반적인 EXIF 위치 정보는 결과 파일에 포함되지 않습니다.</p>
+    </details>
+  </section>
+
+  <section class="container ad-slot ad-slot-bottom" aria-label="Advertisement">
+    <span>ADVERTISEMENT</span>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand footer-brand" href="./">
+        <span class="brand-mark">I</span><span>work-img</span>
+      </a>
+      <p data-i18n="footerDesc">서버 전송 없이 안전하게 사용하는 무료 画像圧縮 도구.</p>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html" data-i18n="privacyLink">プライバシーポリシー</a>
+      <a href="terms.html" data-i18n="termsLink">利用規約</a>
+      <a href="contact.html" data-i18n="contactLink">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="container copyright">© 2026 work-img</div>
+</footer>
+
+<script>
+
+(()=>{'use strict';
+const $=s=>document.querySelector(s),quality=$('#quality'),qualityValue=$('#qualityValue'),fileInput=$('#fileInput'),pickBtn=$('#pickBtn'),dropzone=$('#dropzone'),formatSelect=$('#formatSelect'),resizeSelect=$('#resizeSelect'),downloadAll=$('#downloadAll'),results=$('#results'),summary=$('#summary'),statusEl=$('#status');
+let jobs=[],sourceFiles=[],timer=0,lang='ja';
+const MAX_FILES=30,MAX_FILE_SIZE=35*1024*1024,MAX_PIXELS=32000000,MAX_DIMENSION=8192;
+const I18N={
+ko:{
+navTool:'이미지 압축',navFeatures:'기능',badge:'🔒 서버 전송 없는 이미지 압축',
+heroTitle:'이미지는 가볍게.<br>개인정보는 그대로.',
+heroCopy:'JPG, PNG, WebP 이미지를 브라우저에서 바로 압축하세요. 이미지 파일은 외부 서버로 전송되거나 저장되지 않습니다.',
+trust1:'✓ 무료',trust2:'✓ 회원가입 없음',trust3:'✓ 로컬 처리',
+dropTitle:'이미지를 여기에 드래그하세요',dropHelp:'또는 버튼을 눌러 파일을 선택하세요 · 여러 장 가능',choose:'이미지 선택',
+privacyInline:'🛡️ 모든 처리는 현재 브라우저 안에서만 이루어집니다.',
+qualityLabel:'압축 품질',formatLabel:'출력 형식',keepFormat:'원본 형식 유지',resizeLabel:'이미지 크기',resizeOriginal:'원본 크기',
+downloadZip:'ZIP으로 모두 다운로드',summaryBefore:'압축 전',summaryAfter:'압축 후',summarySaved:'절감률',
+featureKicker:'WHY WORK-IMG',featureTitle:'간단하지만 필요한 기능은 제대로',
+f1Title:'서버 전송 없음',f1Text:'이미지 데이터는 사용자의 브라우저 안에서 처리됩니다.',
+f2Title:'메타데이터 제거',f2Text:'이미지를 다시 인코딩하면서 EXIF 등 불필요한 메타데이터를 제거합니다.',
+f3Title:'일괄 다운로드',f3Text:'압축한 여러 이미지를 한 번에 다운로드할 수 있습니다.',
+f4Title:'모바일 대응',f4Text:'스마트폰과 태블릿에서도 편하게 사용할 수 있도록 반응형으로 제작했습니다.',
+faqTitle:'자주 묻는 질문',
+faq1q:'정말 이미지가 서버로 전송되지 않나요?',faq1a:'네. 압축 처리는 브라우저 기능을 이용해 사용자의 기기에서 수행됩니다.',
+faq2q:'PNG도 압축할 수 있나요?',faq2a:'가능합니다. PNG는 무손실 포맷 특성상 JPG/WebP보다 용량 변화가 작을 수 있습니다.',
+faq3q:'사진의 위치 정보도 제거되나요?',faq3a:'이미지를 다시 생성하기 때문에 일반적인 EXIF 위치 정보는 결과 파일에 포함되지 않습니다.',
+footerDesc:'서버 전송 없이 안전하게 사용하는 무료 이미지 압축 도구.',privacyLink:'개인정보처리방침',termsLink:'이용약관',contactLink:'문의',
+processing:'이미지를 처리하고 있습니다…',done:'압축이 완료되었습니다.',failed:'일부 이미지를 처리하지 못했습니다.',
+download:'다운로드',remove:'삭제',original:'원본',compressed:'압축 후',saved:'절감',
+png:'PNG는 무손실 포맷이라 JPG/WebP보다 용량 변화가 작을 수 있습니다.',increase:'용량 증가',summaryIncrease:'증가율',keptOriginal:'이미 최적화됨',keptNotice:'원본보다 결과가 커지는 파일은 원본 크기를 유지했습니다.'
+},
+ja:{
+navTool:'画像圧縮',navFeatures:'機能',badge:'🔒 サーバー送信なしの画像圧縮',
+heroTitle:'画像は軽く。<br>プライバシーはそのまま。',
+heroCopy:'JPG・PNG・WebP画像をブラウザ上ですぐに圧縮できます。画像ファイルは外部サーバーへ送信・保存されません。',
+trust1:'✓ 無料',trust2:'✓ 登録不要',trust3:'✓ ローカル処理',
+dropTitle:'画像をここにドラッグ＆ドロップ',dropHelp:'またはボタンから選択 · 複数枚対応',choose:'画像を選択',
+privacyInline:'🛡️ すべての処理はこのブラウザ内だけで行われます。',
+qualityLabel:'圧縮品質',formatLabel:'出力形式',keepFormat:'元の形式を維持',resizeLabel:'画像サイズ',resizeOriginal:'元のサイズ',
+downloadZip:'すべてダウンロード',summaryBefore:'圧縮前',summaryAfter:'圧縮後',summarySaved:'削減率',
+featureKicker:'WHY WORK-IMG',featureTitle:'シンプルでも必要な機能はしっかり',
+f1Title:'サーバー送信なし',f1Text:'画像データはユーザーのブラウザ内で処理されます。',
+f2Title:'メタデータ削除',f2Text:'画像を再エンコードし、EXIFなど不要なメタデータを削除します。',
+f3Title:'一括ダウンロード',f3Text:'圧縮した複数の画像をまとめてダウンロードできます。',
+f4Title:'モバイル対応',f4Text:'スマートフォンやタブレットでも使いやすいレスポンシブ設計です。',
+faqTitle:'よくある質問',
+faq1q:'本当に画像はサーバーへ送信されませんか？',faq1a:'はい。圧縮処理はブラウザ機能を使い、ユーザーの端末上で実行されます。',
+faq2q:'PNGも圧縮できますか？',faq2a:'可能です。PNGは可逆圧縮形式のため、JPG/WebPより容量変化が小さい場合があります。',
+faq3q:'写真の位置情報も削除されますか？',faq3a:'画像を再生成するため、一般的なEXIF位置情報は出力ファイルに含まれません。',
+footerDesc:'サーバー送信なしで安全に使える無料画像圧縮ツール。',privacyLink:'プライバシーポリシー',termsLink:'利用規約',contactLink:'お問い合わせ',
+processing:'画像を処理しています…',done:'圧縮が完了しました。',failed:'一部の画像を処理できませんでした。',
+download:'ダウンロード',remove:'削除',original:'元画像',compressed:'圧縮後',saved:'削減',
+png:'PNGは可逆形式のため、JPG/WebPより容量変化が小さい場合があります。',increase:'容量増加',summaryIncrease:'増加率',keptOriginal:'最適化済み',keptNotice:'圧縮後のサイズが元画像より大きくなるファイルは、元のサイズを維持しました。'
+},
+en:{
+navTool:'Compress',navFeatures:'Features',badge:'🔒 Image compression without server uploads',
+heroTitle:'Lighter images.<br>Your privacy stays yours.',
+heroCopy:'Compress JPG, PNG and WebP images directly in your browser. Image files are never uploaded to or stored on an external server.',
+trust1:'✓ Free',trust2:'✓ No account',trust3:'✓ Local processing',
+dropTitle:'Drag & drop images here',dropHelp:'Or choose files · multiple images supported',choose:'Choose images',
+privacyInline:'🛡️ All processing happens only inside this browser.',
+qualityLabel:'Compression quality',formatLabel:'Output format',keepFormat:'Keep original format',resizeLabel:'Image size',resizeOriginal:'Original size',
+downloadZip:'Download all',summaryBefore:'Before',summaryAfter:'After',summarySaved:'Saved',
+featureKicker:'WHY WORK-IMG',featureTitle:'Simple, with the features that matter',
+f1Title:'No server uploads',f1Text:'Image data is processed inside your browser.',
+f2Title:'Metadata removal',f2Text:'Images are re-encoded, removing common EXIF and unnecessary metadata.',
+f3Title:'Batch download',f3Text:'Download multiple compressed images together.',
+f4Title:'Mobile friendly',f4Text:'Responsive layout designed for smartphones and tablets.',
+faqTitle:'Frequently asked questions',
+faq1q:'Are images really not uploaded to a server?',faq1a:'Yes. Compression runs on your device using browser features.',
+faq2q:'Can PNG files be compressed?',faq2a:'Yes. Because PNG is lossless, size changes may be smaller than JPG/WebP.',
+faq3q:'Is photo location data removed?',faq3a:'Because the image is regenerated, common EXIF location data is not included in the output file.',
+footerDesc:'A free image compression tool that works without server uploads.',privacyLink:'Privacy',termsLink:'Terms',contactLink:'Contact',
+processing:'Processing images…',done:'Compression complete.',failed:'Some images could not be processed.',
+download:'Download',remove:'Remove',original:'Original',compressed:'Compressed',saved:'Saved',
+png:'PNG is lossless, so size changes may be smaller than JPG/WebP.',increase:'Size increase',summaryIncrease:'Increase',keptOriginal:'Already optimized',keptNotice:'Files that would become larger keep their original size.'
+}
+};
+const tr=k=>(I18N[lang]||I18N.ko)[k]||k;
+
+function setLanguage(next){
+  lang=next;
+  document.documentElement.lang=next;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    const value=tr(key);
+    if(value!==undefined) el.innerHTML=value;
+  });
+  render();
+}
+function status(m,type='info'){statusEl.textContent=m;statusEl.className='status show '+type}function clear(){statusEl.className='status';statusEl.textContent=''}
+function fmt(n){return n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(2)+' MB'}
+function ext(t){return t==='image/jpeg'?'jpg':t==='image/webp'?'webp':t==='image/png'?'png':'img'}function base(n){return n.replace(/\.[^.]+$/,'')}
+function revoke(j){try{URL.revokeObjectURL(j.previewUrl)}catch{}try{URL.revokeObjectURL(j.outputUrl)}catch{}}
+function outputType(file){return formatSelect.value==='auto'?(['image/jpeg','image/png','image/webp'].includes(file.type)?file.type:'image/webp'):formatSelect.value}
+async function bitmap(file){if('createImageBitmap'in window)try{return await createImageBitmap(file,{imageOrientation:'from-image'})}catch{}return new Promise((res,rej)=>{const u=URL.createObjectURL(file),im=new Image;im.onload=()=>{URL.revokeObjectURL(u);res(im)};im.onerror=()=>{URL.revokeObjectURL(u);rej()};im.src=u})}
+function quantizePng(ctx,w,h,q){
+  // Browser PNG encoders ignore the quality argument. Reduce color precision
+  // gently so the PNG encoder has a better chance to create a smaller file.
+  // 95% keeps near-original precision; lower quality reduces more.
+  if(q>=0.95) return;
+  try{
+    const levels=Math.max(24,Math.round(24+q*160));
+    const step=255/(levels-1);
+    const img=ctx.getImageData(0,0,w,h);
+    const d=img.data;
+    for(let i=0;i<d.length;i+=4){
+      d[i]=Math.round(d[i]/step)*step;
+      d[i+1]=Math.round(d[i+1]/step)*step;
+      d[i+2]=Math.round(d[i+2]/step)*step;
+    }
+    ctx.putImageData(img,0,0);
+  }catch(e){
+    // Large canvases may reject getImageData due to memory limits.
+  }
+}
+
+async function compress(file){
+  const im=await bitmap(file),
+        sw=im.width||im.naturalWidth,
+        sh=im.height||im.naturalHeight;
+
+  if(sw*sh>MAX_PIXELS) throw new Error('large');
+
+  const requestedScale=Number(resizeSelect.value);
+  let scale=Math.min(requestedScale,MAX_DIMENSION/sw,MAX_DIMENSION/sh,1),
+      w=Math.max(1,Math.round(sw*scale)),
+      h=Math.max(1,Math.round(sh*scale)),
+      c=document.createElement('canvas');
+
+  c.width=w;c.height=h;
+  let x=c.getContext('2d',{alpha:true});
+  x.imageSmoothingEnabled=true;
+  x.imageSmoothingQuality='high';
+  x.drawImage(im,0,0,w,h);
+  if(im.close) im.close();
+
+  const type=outputType(file),
+        q=Number(quality.value)/100;
+
+  if(type==='image/png') quantizePng(x,w,h,q);
+
+  let b=await new Promise((res,rej)=>c.toBlob(v=>v?res(v):rej(),type,q));
+  let keptOriginal=false;
+
+  // Critical safeguard:
+  // If output format and dimensions are unchanged but re-encoding makes the
+  // file larger, keep the original file instead of pretending it was compressed.
+  if(type===file.type && scale===1 && b.size>=file.size){
+    b=file;
+    keptOriginal=true;
+  }
+
+  return{
+    id:crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random(),
+    file,
+    blob:b,
+    outputType:type,
+    width:w,
+    height:h,
+    keptOriginal,
+    previewUrl:URL.createObjectURL(file),
+    outputUrl:URL.createObjectURL(b)
+  };
+}
+
+async function process(files){
+  const accepted=[...files]
+    .filter(f=>f.type.startsWith('image/')&&f.size<=MAX_FILE_SIZE)
+    .slice(0,MAX_FILES);
+
+  if(!accepted.length) return;
+
+  sourceFiles=accepted;
+  status(tr('processing'));
+
+  let next=[],fail=0;
+  for(const f of accepted){
+    try{next.push(await compress(f))}
+    catch{fail++}
+  }
+
+  jobs.forEach(revoke);
+  jobs=next;
+  render();
+
+  const kept=jobs.some(j=>j.keptOriginal);
+
+  if(fail){
+    status(tr('failed'),'warn');
+  }else if(kept){
+    status(tr('keptNotice'),'info');
+  }else{
+    status(tr('done'),'info');
+  }
+
+  if(sourceFiles.some(f=>f.type==='image/png')&&formatSelect.value==='auto'&&!kept){
+    status(tr('png'),'warn');
+  }
+}
+
+async function reprocess(){if(sourceFiles.length)await process(sourceFiles)}
+function render(){
+  results.innerHTML='';
+
+  for(const j of jobs){
+    const delta=j.file.size?((j.file.size-j.blob.size)/j.file.size)*100:0;
+    const isSaving=delta>=0;
+    const deltaText=isSaving
+      ? `${tr('saved')} ${Math.max(0,delta).toFixed(1)}%`
+      : `${tr('increase')} ${Math.abs(delta).toFixed(1)}%`;
+
+    const note=j.keptOriginal
+      ? `<span class="optimized-note">${tr('keptOriginal')}</span>`
+      : '';
+
+    const d=document.createElement('article');
+    d.className='result-card';
+    d.innerHTML=`<img class="thumb" src="${j.previewUrl}" alt="">
+      <div>
+        <div class="file-name">${j.file.name}</div>
+        <div class="file-meta">
+          <span>${tr('original')} ${fmt(j.file.size)}</span>
+          <span>${tr('compressed')} ${fmt(j.blob.size)}</span>
+          <span>${j.width}×${j.height}</span>
+          <span>${j.outputType.replace('image/','').toUpperCase()}</span>
+          <span class="${isSaving?'good':'bad'}">${deltaText}</span>
+          ${note}
+        </div>
+      </div>
+      <div class="file-actions">
+        <button class="small-btn primary" data-a="down" data-id="${j.id}">${tr('download')}</button>
+        <button class="small-btn" data-a="remove" data-id="${j.id}">${tr('remove')}</button>
+      </div>`;
+    results.appendChild(d);
+  }
+
+  const before=jobs.reduce((n,j)=>n+j.file.size,0),
+        after=jobs.reduce((n,j)=>n+j.blob.size,0),
+        delta=before?((before-after)/before)*100:0,
+        isSaving=delta>=0;
+
+  $('#beforeTotal').textContent=fmt(before);
+  $('#afterTotal').textContent=fmt(after);
+
+  const metric=$('#savedTotal');
+  const metricLabel=summary.querySelector('article:nth-child(3) span');
+
+  metric.textContent=`${Math.abs(delta).toFixed(1)}%`;
+  metric.className=isSaving?'saved':'increased';
+  metricLabel.textContent=isSaving?tr('summarySaved'):tr('summaryIncrease');
+
+  summary.hidden=!jobs.length;
+  downloadAll.disabled=!jobs.length;
+}
+
+function dl(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+pickBtn.addEventListener('click',()=>fileInput.click());fileInput.addEventListener('change',e=>process(e.target.files));
+['dragenter','dragover'].forEach(t=>dropzone.addEventListener(t,e=>{e.preventDefault();dropzone.classList.add('dragover')}));['dragleave','drop'].forEach(t=>dropzone.addEventListener(t,e=>{e.preventDefault();dropzone.classList.remove('dragover')}));dropzone.addEventListener('drop',e=>process(e.dataTransfer.files));dropzone.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fileInput.click()}});
+quality.addEventListener('input',()=>{qualityValue.textContent=quality.value+'%';qualityValue.value=quality.value+'%';clearTimeout(timer);timer=setTimeout(reprocess,250)});formatSelect.addEventListener('change',reprocess);resizeSelect.addEventListener('change',reprocess);
+results.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const j=jobs.find(x=>x.id===b.dataset.id);if(!j)return;if(b.dataset.a==='down')dl(j.blob,base(j.file.name)+'-compressed.'+ext(j.outputType));else{revoke(j);jobs=jobs.filter(x=>x!==j);sourceFiles=sourceFiles.filter(x=>x!==j.file);render()}});
+downloadAll.addEventListener('click',()=>{jobs.forEach((j,i)=>setTimeout(()=>dl(j.blob,base(j.file.name)+'-compressed.'+ext(j.outputType)),i*180))});
+$('#langSelect').addEventListener('change',e=>setLanguage(e.target.value));
+qualityValue.textContent=quality.value+'%';
+setLanguage('ja');
+})();
+
+</script>
+</body>
+</html>
