@@ -1,34 +1,27 @@
-# work-img v4
+# work-img v5 secure pre-release
 
-日本語を基本言語とした単一HTMLベースのデプロイ版です。
+日本語を基本言語とした公開前セキュリティ・安定性修正版です。
 
-## 今回の更新内容
-- 圧縮品質: スライダー + 数値直接入力
-- 画像サイズ: 数値直接入力（10%〜100%）
-- これ以上圧縮しにくいPNG等は「すでに最適化済み」を表示
-- メインコピーの行間を調整
-- アップロードエリア上部に広告バナーを追加
-- 寄付バナーを追加
-- フッター表記を「© 2026 workson」に変更
-- 添付アイコンをサイトロゴ / ファビコンに適用
-- 日本語 / 韓国語 / 英語切り替え対応
+## 主な変更
+- 元画像フォールバックを廃止し、常にCanvas再エンコード結果を使用
+- ファイル名DOM XSS対策（textContent / DOM API）
+- JPG / PNG / WebP / AVIFのホワイトリスト + 実ファイルシグネチャ確認
+- 合計容量・総画素数・ZIP容量のメモリ安全上限
+- モバイル向け保守的な上限
+- CSS / JavaScriptを外部ファイル化
+- 広告未導入時用の厳格CSP（connect-src 'none'）
+- Privacy / Termsの公開前文言を整理
+- AdSense導入時の注意事項をSECURITY.mdに記載
 
-## ファイル
+## 公開ファイル
 - index.html
+- assets/css/app.css
+- assets/js/app.js
+- assets/icons/*
 - privacy.html
 - terms.html
 - contact.html
-- assets/icons/logo.png
-- assets/icons/favicon.ico
-- assets/icons/apple-touch-icon.png
+- _headers
+- SECURITY.md
 
-## メモ
-- PNG は可逆形式のため、元から最適化されている場合はサイズがほぼ変わらないことがあります。
-- 必要に応じて広告コードや寄付リンク先を設定してください。
-
-- 圧縮品質の表示は数値入力欄1つに整理（前方の色付き％表示を削除）
-
-- 圧縮品質：短いスライダー＋数値＋%を横一列に変更
-- 圧縮品質 / 画像サイズの%記号の枠線を削除
-- 下部広告を中央揃え
-- フッター説明文を work-img の横に1行表示
+実際にAdSenseを導入する前に、SECURITY.mdの注意事項に沿ってCSPとCMP設定を更新してください。
