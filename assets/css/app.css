@@ -223,3 +223,229 @@
 .legal-box a{color:var(--primary-dark);text-decoration:underline;text-underline-offset:3px}
 .limit-note{font-size:12px;color:#98a2b3;margin-top:8px}
 .security-note{margin-top:12px;font-size:12px;color:#667085;line-height:1.7}
+
+
+/* v5.1 mobile review fixes */
+@media (max-width:640px){
+  .nav{
+    gap:10px;
+  }
+  .brand{
+    min-width:0;
+    font-size:19px;
+    gap:9px;
+  }
+  .brand img{
+    width:40px;
+    height:40px;
+  }
+  .lang-select{
+    margin-left:auto;
+    flex:0 0 auto;
+    padding:10px 11px;
+  }
+
+  .hero{
+    padding:42px 0 22px;
+  }
+  .hero h1{
+    font-size:clamp(32px,9vw,40px);
+    line-height:1.16;
+  }
+  .hero-copy{
+    margin-top:16px;
+    line-height:1.72;
+  }
+
+  .ad-slot{
+    min-height:84px;
+  }
+  .tool-panel{
+    padding:10px;
+  }
+  .dropzone{
+    min-height:280px;
+    padding:28px 16px;
+  }
+  .upload-icon{
+    width:66px;
+    height:66px;
+    border-radius:20px;
+    font-size:30px;
+  }
+  .dropzone h2{
+    font-size:22px;
+    line-height:1.35;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:12px;
+  }
+  .control-block{
+    gap:6px;
+  }
+  .quality-row{
+    gap:8px;
+    min-height:auto;
+    width:100%;
+  }
+  .quality-slider-wrap{
+    width:auto;
+    min-width:0;
+    flex:1 1 auto;
+  }
+  .quality-range-labels{
+    width:calc(100% - 103px);
+    max-width:none;
+    margin-top:-3px;
+  }
+  .compact-number{
+    flex:0 0 auto;
+  }
+  .percent-input{
+    width:70px;
+    padding:9px 9px;
+  }
+  .select-control,
+  .secondary-btn{
+    min-height:44px;
+  }
+
+  .result-card{
+    gap:10px;
+    padding:12px;
+  }
+  .file-name{
+    font-size:16px;
+  }
+  .file-meta{
+    gap:5px 10px;
+  }
+
+  .donation-card{
+    padding:18px;
+    gap:14px;
+  }
+  .donation-text h3{
+    font-size:20px;
+  }
+  .donate-btn{
+    width:100%;
+    text-align:center;
+  }
+
+  .section{
+    padding-top:64px;
+  }
+  .section-heading{
+    margin-bottom:24px;
+  }
+
+  .footer-grid{
+    gap:18px;
+    padding:30px 0 20px;
+  }
+  .footer-brandline{
+    gap:8px 10px;
+  }
+  .footer-brand{
+    font-size:18px;
+  }
+  .footer-brand img{
+    width:36px;
+    height:36px;
+  }
+  .footer-desc{
+    line-height:1.6;
+  }
+  .footer-links{
+    gap:4px;
+  }
+  .copyright{
+    padding:15px 0 24px;
+  }
+
+  .legal-page{
+    padding:34px 0 56px;
+  }
+  .legal-box{
+    padding:22px;
+    border-radius:18px;
+  }
+  .legal-box h1{
+    font-size:30px;
+  }
+}
+
+@media (max-width:360px){
+  .container{
+    width:min(100% - 18px,1160px);
+  }
+  .brand{
+    font-size:18px;
+  }
+  .brand img{
+    width:36px;
+    height:36px;
+  }
+  .lang-select{
+    padding:9px 9px;
+    font-size:13px;
+  }
+  .hero h1{
+    font-size:30px;
+  }
+  .quality-range-labels{
+    width:calc(100% - 96px);
+  }
+  .percent-input{
+    width:64px;
+  }
+}
+
+/* v5.1 final mobile polish */
+@media (max-width:640px){
+  .footer-links a{
+    padding:8px 7px;
+  }
+  .file-name{
+    max-width:100%;
+  }
+  .hero,
+  .tool-panel,
+  .controls,
+  .donation-card,
+  .feature-card,
+  .faq-section details{
+    min-width:0;
+  }
+}
+
+/* v5.2 mobile control spacing */
+@media (max-width:640px){
+  .controls{
+    row-gap:7px;
+  }
+
+  /* The 20% / 95% helper row made the next control look too far away.
+     Keep it on desktop, hide it on mobile. */
+  .quality-range-labels{
+    display:none;
+  }
+
+  .quality-block{
+    gap:4px;
+    margin-bottom:0;
+  }
+
+  .quality-row{
+    margin-bottom:0;
+  }
+
+  /* Keep label-to-field spacing compact and consistent. */
+  .control-block{
+    gap:5px;
+  }
+}
